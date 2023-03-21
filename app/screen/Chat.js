@@ -4,7 +4,7 @@ import React, {
   useLayoutEffect,
   useState
 } from 'react';
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
 
 import {
   collection,
@@ -13,10 +13,13 @@ import {
   query,
   onSnapshot
 } from 'firebase/firestore';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { auth, database } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import colors from '../utils/colors';
+import { ImageBackground } from 'react-native';
 
 const Chat = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
@@ -82,25 +85,60 @@ const Chat = ({ navigation }) => {
       </View>
     );
   };
-
+  const renderSend = (props) => {
+    return (
+      <Send {...props} containerStyle={styles.sendContainer}>
+        <View style={styles.sendButton}>
+          <MaterialIcons name="send" size={24} color={colors.brand} />
+        </View>
+      </Send>
+    );
+  };
   return (
-    <GiftedChat
-      messages={messages}
-      showAvatarForEveryMessage={true}
-      onSend={(messages) => onSend(messages)}
-      user={{
-        _id: auth?.currentUser?.email,
-        avatar:
-          'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-      }}
-      renderAvatar={renderAvatar}
-    />
+    <ImageBackground
+      style={styles.container}
+      source={require('../../assets/BG.png')}
+    >
+      <GiftedChat
+        messages={messages}
+        showAvatarForEveryMessage={true}
+        onSend={(messages) => onSend(messages)}
+        user={{
+          _id: auth?.currentUser?.email,
+          avatar:
+            'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
+        }}
+        renderAvatar={renderAvatar}
+        renderSend={renderSend}
+        renderBubble={(props) => {
+          return (
+            <Bubble
+              {...props}
+              wrapperStyle={{
+                left: {
+                  backgroundColor: '#FFFFFF',
+                  color: '#ffffff'
+                },
+                right: {
+                  backgroundColor: colors.brand,
+                  color: '#ffffff'
+                }
+              }}
+            />
+          );
+        }}
+      />
+    </ImageBackground>
   );
 };
 
 export default Chat;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.bg
+  },
   avatarContainer: {
     marginRight: 10
   },
@@ -108,5 +146,15 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18
+  },
+  sendContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10
+  },
+  sendButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 15,
+    padding: 10
   }
 });
