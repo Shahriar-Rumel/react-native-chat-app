@@ -2,10 +2,20 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { TextInput } from 'react-native';
 import colors from '../utils/colors';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onHandleSignup = () => {
+    if (email !== '' && password !== '') {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => console.log('Signup success'))
+        .catch((err) => console.log(`Login err: ${err}`));
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -33,7 +43,9 @@ const Register = ({ navigation }) => {
         value={password}
         onChangeText={(text) => setPassword(text)}
       />
-      <Text style={styles.registerButton}>Register</Text>
+      <Text style={styles.registerButton} onPress={onHandleSignup}>
+        Register
+      </Text>
       <Text
         style={styles.loginButton}
         onPress={() => navigation.navigate('Login')}
