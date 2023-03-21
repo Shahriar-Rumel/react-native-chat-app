@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
     letterSpacing: -1.0,
     fontWeight: 700,
     marginBottom: 12,
-    color: '#38630E'
+    color: '#38630E',
+    width: '90%'
   },
   input: {
     backgroundColor: colors.bg,
