@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { TextInput } from 'react-native';
-import colors from '../config/colors';
+import colors from '../utils/colors';
 
 const Register = ({ navigation }) => {
   const [email, setEmail] = useState('');
