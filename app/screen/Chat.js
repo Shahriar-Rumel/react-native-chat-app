@@ -4,8 +4,16 @@ import React, {
   useLayoutEffect,
   useState
 } from 'react';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ImageBackground
+} from 'react-native';
 import { Bubble, GiftedChat, Send } from 'react-native-gifted-chat';
-
+import { MaterialIcons } from '@expo/vector-icons';
 import {
   collection,
   addDoc,
@@ -13,13 +21,10 @@ import {
   query,
   onSnapshot
 } from 'firebase/firestore';
-import { MaterialIcons } from '@expo/vector-icons';
 
 import { auth, database } from '../../config/firebase';
 import { signOut } from 'firebase/auth';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import colors from '../utils/colors';
-import { ImageBackground } from 'react-native';
+import colors from '../config/colors';
 
 const Chat = ({ navigation }) => {
   const [messages, setMessages] = useState([]);

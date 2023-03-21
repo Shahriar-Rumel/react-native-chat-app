@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import { TextInput } from 'react-native';
-import colors from '../utils/colors';
+
+import colors from '../config/colors';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 
@@ -99,7 +100,6 @@ const styles = StyleSheet.create({
     width: '90%',
     textAlign: 'center',
     paddingVertical: 12,
-    cursor: 'pointer',
     borderRadius: 7
   },
   registerButton: {
