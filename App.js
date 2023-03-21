@@ -3,11 +3,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { onAuthStateChanged } from 'firebase/auth';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import Chat from './app/screen/Chat';
 import Login from './app/screen/Login';
 import Register from './app/screen/Register';
 import { auth } from './config/firebase';
 
 const Stack = createStackNavigator();
+
+const ChatStack = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Chat" component={Chat} />
+    </Stack.Navigator>
+  );
+};
 
 const AuthStack = () => {
   return (
@@ -56,7 +65,7 @@ const RootNavigator = () => {
 
   return (
     <NavigationContainer>
-      {user ? <Text>Hello</Text> : <AuthStack />}
+      {user ? <ChatStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };
