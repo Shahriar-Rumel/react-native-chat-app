@@ -30,7 +30,7 @@ To get started with this boilerplate project, follow these steps:
 1. **Clone the repository to your local machine:**
 
    ```console
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/Shahriar-Rumel/react-native-chat-app.git
    ```
 
 2. **Install the required dependencies:**
